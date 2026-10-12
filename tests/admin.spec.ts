@@ -40,9 +40,7 @@ test.describe("Metamint Helpdesk admin suite", () => {
     "helpers: reply to ticket and status change @regression @admin",
     async ({ page }) => {
       const reply = createReplyData();
-      await page.goto(
-        "/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard",
-      );
+      await page.goto("/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard");
       await page.locator("tr[data-ticketid]").first().click();
       await expect(page).toHaveURL(/ticket=\d+/);
       await replyToTicket(page, reply.content);
@@ -71,9 +69,7 @@ test.describe("Metamint Helpdesk admin suite", () => {
   adminTest(
     "ticket: priority change persists on dashboard ticket view @regression @admin",
     async ({ page }) => {
-      await page.goto(
-        "/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard",
-      );
+      await page.goto("/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard");
       await page.locator("tr[data-ticketid]").first().click();
       await expect(page).toHaveURL(/ticket=\d+/);
       const prioritySelect = page.locator("#ticket-priority-select");
@@ -98,9 +94,7 @@ test.describe("Metamint Helpdesk admin suite", () => {
   adminTest(
     "ticket: assignee change persists on dashboard ticket view @regression @admin",
     async ({ page }) => {
-      await page.goto(
-        "/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard",
-      );
+      await page.goto("/wp-admin/admin.php?page=mmhd-dashboard&tab=dashboard");
       await page.locator("tr[data-ticketid]").first().click();
       await expect(page).toHaveURL(/ticket=\d+/);
       const assigneeSelect = page.locator("#ticket-assignee-select");
@@ -214,5 +208,4 @@ test.describe("Metamint Helpdesk admin suite", () => {
     await page.goto("/wp-admin/admin.php?page=mmhd-debug-log");
     await expect(page.locator("body")).toBeVisible();
   });
-
 });
