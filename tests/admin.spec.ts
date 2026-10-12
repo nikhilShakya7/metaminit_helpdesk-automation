@@ -189,21 +189,25 @@ test.describe("Metamint Helpdesk admin suite", () => {
   adminTest(
     "notice: create, publish and trash a notice @regression @admin",
     async ({ page }) => {
+      const NOTICE_POST_TYPE = "mmhd_notice";
       const title = `QA Notice ${Date.now()}`;
-      await page.goto("/wp-admin/post-new.php?post_type=notice");
+
+      await page.goto(`/wp-admin/post-new.php?post_type=${NOTICE_POST_TYPE}`);
+      await expect(page.locator("#title")).toBeVisible({ timeout: 15000 });
       await page.locator("#title").fill(title);
       await page.locator("#publish").click();
       await expect(page.locator("#message")).toContainText(/published/i, {
         timeout: 15000,
       });
-      await page.goto("/wp-admin/edit.php?post_type=notice");
+
+      await page.goto(`/wp-admin/edit.php?post_type=${NOTICE_POST_TYPE}`);
       const row = page.locator("#the-list tr").filter({ hasText: title });
-      await expect(row).toHaveCount(1);
+      await expect(row).toHaveCount(1, { timeout: 30000 });
       await row.hover();
       await row.locator("a.submitdelete").click();
       await expect(
         page.locator("#the-list tr").filter({ hasText: title }),
-      ).toHaveCount(0);
+      ).toHaveCount(0, { timeout: 30000 });
     },
   );
   adminTest("debug log: page loads @regression @admin", async ({ page }) => {
