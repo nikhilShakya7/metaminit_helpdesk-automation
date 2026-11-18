@@ -52,7 +52,7 @@ const ADMIN_STORAGE_FILE = join(process.cwd(), ".state", "admin-wp-storage.json"
 async function loginCustomerViaWidgetOnce(browser: Browser): Promise<StorageState> {
   const context = await browser.newContext();
   const page = await context.newPage();
-  await page.goto("/");
+  await page.goto(config.supportPagePath);
   await loginCustomerViaWidgetWithPassword(
     page,
     CUSTOMER_EMAIL,
@@ -76,7 +76,7 @@ async function validateCustomerStorage(
   const context = await browser.newContext({ storageState: state });
   const page = await context.newPage();
   try {
-    await page.goto("/mmhd-support/?mmhd_page=my-tickets");
+    await page.goto(`${config.supportPagePath}?mmhd_page=my-tickets`);
     await page.waitForTimeout(2000);
     const loggedIn = await page.evaluate(
       () => !document.body.innerText.includes("Please login to view your tickets"),
@@ -205,6 +205,12 @@ function authenticatedAdminContextFixture() {
     const state = await getWorkerAdminStorage(browser, testInfo.workerIndex);
     const context = await browser.newContext({ storageState: state });
     const page = await context.newPage();
+    await page.addLocatorHandler(
+      page.getByRole("button", { name: /already reviewed/i }),
+      async (button) => {
+        await button.click();
+      },
+    );
     await use(page);
     await context.close();
   };

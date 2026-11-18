@@ -7,6 +7,7 @@ End-to-end Playwright test suite for the Metamint Helpdesk customer support plug
 - Node.js 20.12+ (uses `process.loadEnvFile`; tested on v24)
 - Playwright browsers installed: `npx playwright install chromium`
 - A running Metamint Helpdesk WordPress site reachable at the configured `BASE_URL`
+- The chat widget is served on the site's `/mmhd-support/` page
 
 ## Setup
 

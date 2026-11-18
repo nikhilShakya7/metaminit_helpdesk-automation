@@ -1,5 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 import { BasePage } from "./basePage";
+import { config } from "../config/env";
 
 export class ChatWidgetPage extends BasePage {
   constructor(page: Page) {
@@ -199,8 +200,8 @@ export class ChatWidgetPage extends BasePage {
     await this.chatView.waitFor({ state: "visible", timeout: 15000 });
   }
 
-  async openHome() {
-    await this.page.goto("/");
+  async openSupportPage() {
+    await this.page.goto(config.supportPagePath);
     await this.waitForLoading();
   }
 
@@ -242,7 +243,7 @@ export class ChatWidgetPage extends BasePage {
   }
 
   async expectWidgetPresent() {
-    await expect(this.page.locator("body")).toBeVisible();
+    await expect(this.chatTrigger).toBeVisible({ timeout: 15000 });
   }
 
   async expectLoginFormVisible() {

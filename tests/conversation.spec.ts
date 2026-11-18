@@ -45,7 +45,7 @@ conversationTest.describe("Metamint Helpdesk two-way conversation", () => {
 
       // Customer: open the same ticket in the chat widget and see the admin reply
       const chatWidget = new ChatWidgetPage(customerPage);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await chatWidget.searchTickets(title);

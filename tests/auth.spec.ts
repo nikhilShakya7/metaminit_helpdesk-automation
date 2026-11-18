@@ -19,7 +19,7 @@ test.describe("Metamint Helpdesk auth", () => {
   }) => {
     const chatWidget = new ChatWidgetPage(page);
     const data = createTicketData();
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.loginCustomerWithPassword(
       config.customerEmail,
       config.customerPassword,
@@ -32,7 +32,7 @@ test.describe("Metamint Helpdesk auth", () => {
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await chatWidget.openConversationsTab();
     await chatWidget.expectLoginFormVisible();
@@ -45,7 +45,7 @@ test.describe("Metamint Helpdesk auth", () => {
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await chatWidget.openConversationsTab();
     await chatWidget.expectLoginFormVisible();
@@ -66,7 +66,7 @@ test.describe("Metamint Helpdesk auth", () => {
         authPosts++;
       }
     });
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await chatWidget.openConversationsTab();
     await chatWidget.expectLoginFormVisible();
@@ -95,7 +95,7 @@ test.describe("Metamint Helpdesk auth", () => {
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await chatWidget.openConversationsTab();
     await chatWidget.expectLoginFormVisible();
@@ -118,7 +118,7 @@ test.describe("Metamint Helpdesk auth", () => {
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await chatWidget.openConversationsTab();
     await chatWidget.expectLoginFormVisible();

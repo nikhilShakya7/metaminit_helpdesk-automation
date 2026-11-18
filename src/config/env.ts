@@ -22,6 +22,7 @@ function required(name: string): string {
 
 export const config = {
   baseUrl: required("BASE_URL"),
+  supportPagePath: "/mmhd-support/",
   adminUsername: required("ADMIN_USERNAME"),
   adminPassword: required("ADMIN_PASSWORD"),
   customerEmail: required("CUSTOMER_EMAIL"),

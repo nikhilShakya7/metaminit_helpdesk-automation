@@ -4,12 +4,13 @@
 
 End-to-end test suite for the Metamint Helpdesk customer support plugin, built with Playwright Test.
 
-- Base URL: `http://metamint.local`
+- Base URL: set by `BASE_URL` in `.env` (the WordPress site root)
 - Browser: Chromium (Desktop Chrome), headless
 - Framework: `@playwright/test`
 - Page Object Model under `src/pages/`
 - Shared helpers under `src/helpers/`
 - Role fixtures under `src/fixtures/`
+- The authenticated admin fixture clicks **Already Reviewed** if the dashboard review prompt appears.
 
 Tests are organized **feature-wise**: one spec file per feature.
 
@@ -114,7 +115,7 @@ npx playwright test tickets.spec.ts --grep "reply to ticket"
 
 | Test                                                                    | Tags                         | What it verifies                                                                                                                                                       |
 | ----------------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| chat: home page renders chat widget container                           | @regression @chat            | Chat widget container is present on the home page                                                                                                                      |
+| chat: support page renders chat widget container                        | @regression @chat            | Chat widget trigger is present on `/mmhd-support/`                                                                                                                     |
 | customer: can use the frontend chat widget                              | @regression @customer        | Widget opens from the home page                                                                                                                                        |
 | chat: customer starts a chat conversation after login                   | @smoke @regression @customer | Sends a message from the widget chat tab and asserts the sent bubble appears                                                                                           |
 | chat: search filters conversations in the widget                        | @smoke @regression @customer | Search narrows the ticket list; the term is derived from the first loaded row (data-independent); a no-match term shows "No tickets found"; clearing restores the list |

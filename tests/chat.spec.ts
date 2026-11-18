@@ -4,11 +4,11 @@ import { join } from "path";
 import { writeFileSync, unlinkSync } from "fs";
 
 test.describe("Metamint Helpdesk chat widget", () => {
-  test("chat: home page renders chat widget container @regression @chat", async ({
+  test("chat: support page renders chat widget container @regression @chat", async ({
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.expectWidgetPresent();
   });
 
@@ -16,7 +16,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     page,
   }) => {
     const chatWidget = new ChatWidgetPage(page);
-    await chatWidget.openHome();
+    await chatWidget.openSupportPage();
     await chatWidget.openWidget();
     await expect(page.locator("body")).toBeVisible();
   });
@@ -26,7 +26,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
       const message = `QA chat message ${Date.now()}`;
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.startChat(message);
       await expect(chatWidget.sentMessage(message)).toBeVisible();
@@ -37,7 +37,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: search filters conversations in the widget @smoke @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await expect(chatWidget.ticketRows.first()).toBeVisible({
@@ -74,7 +74,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: priority and status filters work in the widget @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await expect(chatWidget.ticketRows.first()).toBeVisible({
@@ -107,7 +107,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: FAQ tab lists questions and search filters them @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openFaqTab();
       await expect(chatWidget.faqItems.first()).toBeVisible({
@@ -148,7 +148,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: FAQ detail opens from the FAQ list @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openFaqTab();
       await expect(chatWidget.faqItems.first()).toBeVisible({
@@ -170,7 +170,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: notices render in the widget @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openNoticesTab();
       await expect(chatWidget.noticeItems.first()).toBeVisible({
@@ -188,7 +188,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: ticket row opens single-ticket chat view and back returns to list @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await expect(chatWidget.ticketRows.first()).toBeVisible({
@@ -210,7 +210,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: customer sends an image attachment in a ticket @smoke @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await chatWidget.openFirstTicket();
@@ -232,7 +232,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: search handles special characters without crashing @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await expect(chatWidget.ticketRows.first()).toBeVisible({
@@ -259,7 +259,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: session persists across page reload (no re-login) @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await expect(chatWidget.ticketRows.first()).toBeVisible({
@@ -284,7 +284,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: empty reply does not send a message @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await expect(chatWidget.chatInput).toBeVisible({ timeout: 10000 });
 
@@ -302,7 +302,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: uploading an invalid file type is rejected @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await chatWidget.openFirstTicket();
@@ -327,7 +327,7 @@ test.describe("Metamint Helpdesk chat widget", () => {
     "chat: uploading an oversized file is rejected @regression @customer",
     async ({ page }) => {
       const chatWidget = new ChatWidgetPage(page);
-      await chatWidget.openHome();
+      await chatWidget.openSupportPage();
       await chatWidget.openWidget();
       await chatWidget.openConversationsTab();
       await chatWidget.openFirstTicket();
